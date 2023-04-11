@@ -16,7 +16,7 @@ const Form = ({
     if (search !== "") {
       setSearch(search);
     } else {
-      setSearch("code");
+      setSearch("a");
     }
   };
 

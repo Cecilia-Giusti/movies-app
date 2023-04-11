@@ -6,12 +6,8 @@ const Content = ({ movies, moviesSort }) => {
 
   useEffect(() => {
     if (moviesSort.length > 1) {
-      console.log("je suis trié");
-      console.log(moviesSort);
       setMoviesView(moviesSort);
     } else {
-      console.log("je ne suis pas trié");
-      console.log(movies);
       setMoviesView(movies);
     }
   }, [movies, moviesSort]);
