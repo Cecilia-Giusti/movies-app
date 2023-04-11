@@ -2,9 +2,8 @@ import React from "react";
 
 const Card = ({ movie }) => {
   const newDate = new Date(movie.release_date);
-  console.log(newDate);
   return (
-    <div className="card">
+    <div className='card'>
       <img
         src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
         alt={movie.title}
@@ -28,7 +27,7 @@ const Card = ({ movie }) => {
       </ul>
       <h3>Synopsis</h3>
       <p>{movie.overview}</p>
-      <div className="btn">Ajouter aux coups de coeurs</div>
+      <div className='btn'>Ajouter aux coups de coeurs</div>
     </div>
   );
 };

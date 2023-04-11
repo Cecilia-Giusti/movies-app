@@ -46,10 +46,10 @@
       justify-content: center;
     }
 
-    #goodToBad {
+    #goodToBad, #goodToBadActive {
       border-radius: 10px 0 0 10px;
     }
-    #badToGood {
+    #badToGood, #badToGoodActive {
       border-radius: 0 10px 10px 0;
     }
     #goodToBad,
@@ -62,17 +62,23 @@
       &:hover {
         background: $black;
       }
+      &Active {
+        background: $black;
+        width: 110px;
+        transition: 0.3s;
+        position: relative;
+      }
     }
-    #goodToBad span {
+    #goodToBad span, #goodToBadActive span {
       transform: translateY(-50%) rotate(-90deg);
       right: 18px;
     }
-    #badToGood span {
+    #badToGood span, #badToGoodActive span {
       transform: translateY(-50%) rotate(90deg);
       left: 16px;
     }
     #goodToBad span,
-    #badToGood span {
+    #badToGood span, #goodToBadActive span, #badToGoodActive span {
       position: absolute;
       top: 50%;
     }
