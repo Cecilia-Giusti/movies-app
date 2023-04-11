@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 
-const Content = ({ movies, moviesSort }) => {
+const Content = ({ movies, moviesSort, setMoviesLike, moviesLike }) => {
   const [moviesView, setMoviesView] = useState([]);
 
   useEffect(() => {
@@ -14,7 +14,12 @@ const Content = ({ movies, moviesSort }) => {
   return (
     <div className='home-content'>
       {moviesView.map((movie) => (
-        <Card key={movie.id} movie={movie} />
+        <Card
+          key={movie.id}
+          movie={movie}
+          setMoviesLike={setMoviesLike}
+          moviesLike={moviesLike}
+        />
       ))}
     </div>
   );
