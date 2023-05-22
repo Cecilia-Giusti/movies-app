@@ -1,14 +1,8 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import MyContext from "../MyContext";
 
-const Form = ({
-  setSearch,
-  movies,
-  top,
-  setTop,
-  setMoviesSort,
-  flop,
-  setFlop,
-}) => {
+const Form = ({ setSearch, top, setTop, flop, setFlop }) => {
+  const { movies, setMoviesSort } = useContext(MyContext);
   const handleSubmit = (e) => {
     e.preventDefault();
     const search = e.target[0].value;
@@ -57,7 +51,11 @@ const Form = ({
     <div className='form-component'>
       <div className='form-container'>
         <form onSubmit={(e) => handleSubmit(e)}>
-          <input type='text' onChange={(e) => handleChange(e)} />
+          <input
+            type='text'
+            onChange={(e) => handleChange(e)}
+            placeholder="Entrez le titre d'un film"
+          />
           <input type='submit' />
         </form>
       </div>

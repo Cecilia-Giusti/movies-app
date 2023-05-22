@@ -1,18 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
-import MyContext from "../MyContext";
+import React from "react";
 
-const Card = ({ movie }) => {
+const CardLike = ({ movie }) => {
   const newDate = new Date(movie.release_date);
-  const [addMovie, setAddMovie] = useState(undefined);
-  const { moviesLike, setMoviesLike } = useContext(MyContext);
-
-  useEffect(() => {
-    if (moviesLike.includes(movie.id)) {
-      setAddMovie(true);
-    } else {
-      setAddMovie(false);
-    }
-  }, [movie, moviesLike]);
 
   const genreFinder = () => {
     let genreArray = [];
@@ -82,25 +71,12 @@ const Card = ({ movie }) => {
     return genreArray.map((genre) => <li key={genre}>{genre}</li>);
   };
 
-  const AddMoviesLike = () => {
-    let storedData = window.localStorage.movies
-      ? window.localStorage.movies.split(",")
-      : [];
-    if (!storedData.includes(movie.id.toString())) {
-      setAddMovie(!addMovie);
-      storedData.push(movie.id.toString());
-      window.localStorage.movies = storedData;
-      setMoviesLike(storedData);
-    }
-  };
-
   const deleteMoviesLike = () => {
     let storedData = window.localStorage.movies
       ? window.localStorage.movies.split(",")
       : [];
     storedData.filter((data) => data !== movie.id.toString());
     window.localStorage.movies = storedData;
-    setMoviesLike(storedData);
   };
   return (
     <div className='card'>
@@ -123,19 +99,12 @@ const Card = ({ movie }) => {
       <ul>{movie.genre_ids ? genreFinder() : null}</ul>
       <h3>Synopsis</h3>
       <p>{movie.overview}</p>
-      {!addMovie ? (
-        <div className='btn ' onClick={AddMoviesLike}>
-          {" "}
-          Ajouter aux coups de coeur{" "}
-        </div>
-      ) : (
-        <div className='btn btn-active' onClick={deleteMoviesLike}>
-          {" "}
-          Supprimer de la liste{" "}
-        </div>
-      )}
+      <div className='btn btn-active' onClick={deleteMoviesLike}>
+        {" "}
+        Supprimer de la liste{" "}
+      </div>
     </div>
   );
 };
 
-export default Card;
+export default CardLike;

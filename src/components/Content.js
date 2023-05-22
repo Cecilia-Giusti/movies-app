@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Card from "./Card";
+import MyContext from "../MyContext";
 
-const Content = ({ movies, moviesSort, setMoviesLike, moviesLike }) => {
+const Content = () => {
+  const { movies, moviesSort, setMoviesLike, moviesLike } =
+    useContext(MyContext);
   const [moviesView, setMoviesView] = useState([]);
 
   useEffect(() => {
@@ -17,8 +20,8 @@ const Content = ({ movies, moviesSort, setMoviesLike, moviesLike }) => {
         <Card
           key={movie.id}
           movie={movie}
-          setMoviesLike={setMoviesLike}
           moviesLike={moviesLike}
+          setMoviesLike={setMoviesLike}
         />
       ))}
     </div>
