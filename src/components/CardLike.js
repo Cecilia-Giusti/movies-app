@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import MyContext from "../MyContext";
 
 const CardLike = ({ movie }) => {
   const newDate = new Date(movie.release_date);
+  const { setMoviesLike } = useContext(MyContext);
 
   const genreFinder = () => {
     let genreArray = [];
@@ -75,8 +77,16 @@ const CardLike = ({ movie }) => {
     let storedData = window.localStorage.movies
       ? window.localStorage.movies.split(",")
       : [];
-    storedData.filter((data) => data !== movie.id.toString());
-    window.localStorage.movies = storedData;
+    const newMoviesList = storedData.filter(
+      (data) => data !== movie.id.toString()
+    );
+    window.localStorage.movies = newMoviesList;
+    if (newMoviesList.length === 0) {
+      setMoviesLike([]);
+      window.location.reload();
+    } else {
+      setMoviesLike(newMoviesList);
+    }
   };
   return (
     <div className='card'>
