@@ -3,16 +3,16 @@ import MyContext from "../MyContext";
 
 const Card = ({ movie }) => {
   const newDate = new Date(movie.release_date);
-  const [addMovie, setAddMovie] = useState(undefined);
+  const [addMovie, setAddMovie] = useState(null);
   const { moviesLike, setMoviesLike } = useContext(MyContext);
 
   useEffect(() => {
-    if (moviesLike.includes(movie.id)) {
+    if (moviesLike.includes(movie.id.toString())) {
       setAddMovie(true);
     } else {
       setAddMovie(false);
     }
-  }, [movie, moviesLike]);
+  }, [addMovie, movie, moviesLike]);
 
   const genreFinder = () => {
     let genreArray = [];
@@ -87,21 +87,28 @@ const Card = ({ movie }) => {
       ? window.localStorage.movies.split(",")
       : [];
     if (!storedData.includes(movie.id.toString())) {
-      setAddMovie(!addMovie);
       storedData.push(movie.id.toString());
       window.localStorage.movies = storedData;
       setMoviesLike(storedData);
+      setAddMovie(true);
     }
   };
-
   const deleteMoviesLike = () => {
     let storedData = window.localStorage.movies
       ? window.localStorage.movies.split(",")
       : [];
-    storedData.filter((data) => data !== movie.id.toString());
-    window.localStorage.movies = storedData;
-    setMoviesLike(storedData);
+    const newMoviesList = storedData.filter(
+      (data) => data !== movie.id.toString()
+    );
+    window.localStorage.movies = newMoviesList;
+    if (newMoviesList.length === 0) {
+      setMoviesLike([]);
+      window.location.reload();
+    } else {
+      setMoviesLike(newMoviesList);
+    }
   };
+
   return (
     <div className='card'>
       <img
